@@ -19,7 +19,8 @@ classifiers = [
     "Operating System :: MacOS :: MacOS X",
     "Operating System :: Microsoft :: Windows",
 ]
-include = ["jsonpath/lark_parser", "build.py"]
+build = "build.py"
+include = ["jsonpath/lark_parser"]
 packages = [
   { include = "jsonpath" }
 ]
@@ -91,9 +92,6 @@ exclude = '''
 )
 '''
 
-[tool.intreehooks]
-build-backend = "build"
-
 [build-system]
-requires = ["intreehooks", "poetry", "lark-parser"]
-build-backend = "intreehooks:loader"
+requires = ["poetry", "lark-parser"]
+build-backend = "poetry.masonry.api"

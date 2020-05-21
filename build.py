@@ -1,4 +1,12 @@
-def build_lark_parser():
+"""
+This script is run by poetry when building from source.
+
+The function signature is fixed to ``def build(params)``, where ``params`` is the
+kwargs dictionary passed to ``setuptools.setup()``.
+"""
+
+
+def build(setup_kwargs):
     import sys
     import subprocess
 
@@ -12,18 +20,3 @@ def build_lark_parser():
     )
     with open("jsonpath/lark_parser", "wb") as f:
         f.write(output)
-
-
-def __getattr__(name):
-    if name == "build_lark_parser":
-        return build_lark_parser
-
-    try:
-        import poetry.masonry.api
-
-        if name in ("build_wheel", "build_sdist"):
-            build_lark_parser()
-
-        return getattr(poetry.masonry.api, name)
-    except ImportError:
-        return getattr(globals(), name)
